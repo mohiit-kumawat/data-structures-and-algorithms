@@ -31,9 +31,9 @@ public:
                     while(mid < end && nums[mid] == nums[mid - 1])
                         mid++;
 
-                    // Skip duplicate end elements
-                    while(mid < end && nums[end] == nums[end + 1])
-                        end--;
+                    // // Skip duplicate end elements
+                    // while(mid < end && nums[end] == nums[end + 1])
+                    //     end--;
                 }
                 else if(sum < 0) {
                     mid++;
