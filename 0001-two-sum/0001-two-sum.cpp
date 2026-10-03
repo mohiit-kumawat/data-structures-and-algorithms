@@ -5,27 +5,27 @@ public:
         int n = nums.size();
 
         int i = 0;
-        int j = n - 1;
-
-        vector<pair<int,int>> arr;
+        int j = n-1;
+        vector<pair<int,int>> ans(n);
         for(int i=0; i<n; i++){
-            arr.push_back({nums[i], i});
+            ans[i]= {nums[i], i};
         }
-        sort(arr.begin(), arr.end());
+        sort(ans.begin(), ans.end());
 
         while(i<j){
 
-            int sum = arr[i].first + arr[j].first;
+            int sum = ans[i].first + ans[j].first;
+
             if(sum == target){
-                return {arr[i].second, arr[j].second};
+                return {ans[i].second, ans[j].second};
             }
-            else if(sum > target){
+            else if( sum > target){
                 j--;
             }
             else{
                 i++;
             }
         }
-        return {-1, -1};
+        return {-1,-1};
     }
 };
