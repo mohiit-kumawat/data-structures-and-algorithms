@@ -10,8 +10,7 @@ public:
 
             sum += nums[i];
 
-            if(sum > maxSum)
-                maxSum = sum;
+            maxSum = max(sum,maxSum);
             
             if(sum < 0)
                 sum = 0;
