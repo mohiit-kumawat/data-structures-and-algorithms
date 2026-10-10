@@ -1,38 +1,38 @@
+
+
 class Solution {
 public:
-    vector<int> asteroidCollision(vector<int>& asteroids) {
+    vector<int> asteroidCollision(vector<int>& nums) {
         
         stack<int> stk;
+        vector<int> ans;
+        int n = nums.size();
 
-        for(auto num: asteroids){
+        for(int i=0; i<n; i++){
 
-            while(!stk.empty() && num<0 && stk.top()>0){
-
-                int sum = num + stk.top();
-                if(sum<0){
-                    stk.pop();
-                }
-                else if(sum > 0)
-                    num = 0;
-                else{
-                    stk.pop();
-                    num = 0;
-                }
+            // current (-ve) keeps destroying smaller +ve tops
+            while((!stk.empty()) && (stk.top() > 0 && nums[i] < 0) && (stk.top() < abs(nums[i]))){ 
+                stk.pop();
             }
 
-            if(num != 0){
-                stk.push(num);
+            // collision still pending: top is +ve, current is -ve, and top >= current
+            if(!stk.empty() && stk.top() > 0 && nums[i] < 0){
+                if(stk.top() == abs(nums[i])){
+                    stk.pop();      // both destroyed
+                }
+                // else top is bigger, current destroyed, do nothing
+            }
+            else{
+                stk.push(nums[i]);  // no collision, current survives
             }
         }
-        int s = stk.size();
-        vector<int> result(s);
 
-        int i = s-1;
         while(!stk.empty()){
-            result[i] = stk.top();
+            ans.push_back(stk.top());
             stk.pop();
-            i--;
         }
-        return result;
+
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
