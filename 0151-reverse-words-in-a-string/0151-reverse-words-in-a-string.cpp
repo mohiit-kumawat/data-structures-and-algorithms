@@ -2,34 +2,34 @@ class Solution {
 public:
     string reverseWords(string s) {
         string ans;
-        stack<char> stk;
-        int i = s.length() - 1;
+        int n = s.length();
+        stack<char> st;
+
+        int i = n - 1;
 
         while (i >= 0) {
-            // skip spaces
-            if (s[i] == ' ') {
-                i--;
-                continue;
-            }
 
-            // push current word onto stack (in reverse, so it comes out forward)
+            // Skip spaces
+            while (i >= 0 && s[i] == ' ')
+                i--;
+
+            if (i < 0)
+                break;
+
+            // Read one word
             while (i >= 0 && s[i] != ' ') {
-                stk.push(s[i]);
+                st.push(s[i]);
                 i--;
             }
 
-            // pop stack to build the word in correct order
-            while (!stk.empty()) {
-                ans += stk.top();
-                stk.pop();
-            }
+            // Add separator between words
+            if (!ans.empty())
+                ans += ' ';
 
-            // add single space if more words remain
-            if (!ans.empty() && i >= 0) {
-                // peek ahead to see if there's another actual word left
-                int j = i;
-                while (j >= 0 && s[j] == ' ') j--;
-                if (j >= 0) ans += ' ';
+            // Build the word
+            while (!st.empty()) {
+                ans += st.top();
+                st.pop();
             }
         }
 
