@@ -20,10 +20,6 @@ public:
             }
         }
 
-        while(!st.empty()){
-            ans += 1;
-            st.pop();
-        }
-        return ans;
+        return st.size();
     }
 };
