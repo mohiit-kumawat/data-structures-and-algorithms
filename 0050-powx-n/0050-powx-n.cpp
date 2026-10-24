@@ -8,10 +8,12 @@ public:
             return 1 / myPow(x, -n);   // handle negative power
         
         double half = myPow(x, n / 2);        // divide power into half
+        double ans = half * half;
         
-        if (n % 2 == 0)
-            return half * half;              // even power
-        else
-            return half * half * x;          // odd power
+        // if odd power:
+        if(n % 2 == 1)
+            return x * ans;
+        
+        return ans;  //even me direct return!
     }
 };
