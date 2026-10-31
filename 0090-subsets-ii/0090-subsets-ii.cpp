@@ -1,19 +1,20 @@
 class Solution {
 public:
 
-    void solve(vector<int>& nums, int index, vector<int>& temp, vector<vector<int>>& ans){
-
-        ans.push_back(temp);  
-
-        for (int i = index; i < nums.size(); i++) {
-        if (i > index && nums[i] == nums[i-1]) continue;   // skip duplicate at this level
-
-        temp.push_back(nums[i]);
-        solve(nums, i + 1, temp, ans);   // i+1: use each element once
-        temp.pop_back();
+    void solve(vector<int>& nums, int index, vector<int>& temp, vector<vector<int>>& ans) {
+    if (index == nums.size()) {
+        ans.push_back(temp);
+        return;
     }
 
-    }
+    temp.push_back(nums[index]);
+    solve(nums, index + 1, temp, ans);
+    temp.pop_back();
+
+    int next = index + 1;
+    while (next < nums.size() && nums[next] == nums[index]) next++;
+    solve(nums, next, temp, ans);
+}
 
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
