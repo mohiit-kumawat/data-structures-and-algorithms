@@ -3,7 +3,6 @@ public:
 
     void solve(vector<int>& nums, int index, vector<int>& temp, vector<vector<int>>& ans){
 
-        // base case: jab ans milega:
         ans.push_back(temp);  
 
         for (int i = index; i < nums.size(); i++) {
